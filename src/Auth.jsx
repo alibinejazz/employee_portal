@@ -46,7 +46,6 @@ import React, { useState } from "react"
         </div>
       )
     }
-  
     return (
       <div className="Auth-form-container">
         <form className="Auth-form">
