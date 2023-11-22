@@ -1,9 +1,28 @@
 
-import React, { useState,  useRef } from "react"
-import { Outlet, Link } from "react-router-dom";
+import React, { useState,  useRef, useEffect } from "react"
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import AlertMessage from "./AlertMessage";
 
+
  function Auth(props) {
+
+  const tokenStr = localStorage.getItem("token");
+  var email = "";
+
+
+    const navigate = useNavigate();
+
+    
+
+    useEffect(() => {
+      if(tokenStr){
+        var userData = JSON.parse(tokenStr);
+        email = userData.email;
+        console.log("User Data: "+ email)
+        navigate(`/dashboard`,{email:email});
+      }
+    },[]);
+
     let [authMode, setAuthMode] = useState("signin")
 
     const signinEmail = useRef("");
@@ -11,7 +30,6 @@ import AlertMessage from "./AlertMessage";
 
 
     const signupEmail = useRef("");
-    const signupPassword = useRef("");
     const signupName = useRef("");
 
     let [error, setError] = useState("")
@@ -31,7 +49,7 @@ import AlertMessage from "./AlertMessage";
 
       const handleSignup = (event) => {
         event.preventDefault();
-        signupApi(event,signupName.current?.value, signupEmail.current?.value, signupPassword.current?.value)
+        signupApi(event,signupName.current?.value, signupEmail.current?.value)
       }
 
       function loginApi(event, email, pass){
@@ -54,6 +72,10 @@ import AlertMessage from "./AlertMessage";
                             setSuccessMessage("")
                        }else{
                         setSuccessMessage("Login Success!")
+                        localStorage.setItem("token", JSON.stringify(responseJson))
+                        setTimeout(()=>{
+                          navigate(`/dashboard`,{email:email});
+                         } , 2000);
                         setError("")
                        }
                        
@@ -67,12 +89,11 @@ import AlertMessage from "./AlertMessage";
                     });
       }
 
-      function signupApi(event, name, mail, pass){
+      function signupApi(event, name, mail){
 
         const payload = {
             fullName: name,
             username: mail,
-            password: pass,
             email: mail,
             role: ["mod", "user"]
         };
@@ -90,11 +111,11 @@ import AlertMessage from "./AlertMessage";
                             setError(responseJson.message)
                             setSuccessMessage("")
                        }else{
-                        setSuccessMessage("Singed up, Succefully!")
+                           setSuccessMessage("")
                            setError("")
                            setTimeout(()=>{
-                            changeAuthMode();
-                           } , 3000);
+                            navigate(`/setpassword/${mail}`,{email:mail});
+                           } , 1000);
                            
                        }
                         
@@ -142,15 +163,17 @@ import AlertMessage from "./AlertMessage";
                   ref={signinEmail}
                 />
               </div>
+
               <div className="form-group mt-3">
-                <label>Password</label>
-                <input
-                  type="password"
-                  className="form-control mt-1"
-                  placeholder="Enter password"
-                  ref={signinPassword}
-                />
-              </div>
+              <label>Password</label>
+              <input
+                type="password"
+                className="form-control mt-1"
+                placeholder="Password"
+                ref={signinPassword}
+              />
+            </div>
+            
               <div className="d-grid gap-2 mt-3">
                 <button type="submit" className="btn btn-primary">
                   Submit
@@ -202,15 +225,7 @@ import AlertMessage from "./AlertMessage";
                 ref={signupEmail}
               />
             </div>
-            <div className="form-group mt-3">
-              <label>Password</label>
-              <input
-                type="password"
-                className="form-control mt-1"
-                placeholder="Password"
-                ref={signupPassword}
-              />
-            </div>
+           
             <div className="d-grid gap-2 mt-3">
               <button type="submit" className="btn btn-primary">
                 Submit

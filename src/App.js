@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Auth from "./Auth"
 import ForgotPassword from "./ForgotPassword"
 import SetPassword from "./SetPassword"
+import Dashboard from "./Dashboard"
+
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Auth />} />
+        
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/setpassword/:email" element={<SetPassword/>}/>
         <Route

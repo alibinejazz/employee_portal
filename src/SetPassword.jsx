@@ -51,7 +51,7 @@ import AlertMessage from "./AlertMessage";
                           setSuccessMessage(responseJson.message)
                           setError("")
                           setTimeout(()=>{
-                            navigate(`1`,{});
+                            navigate(`/`,{email:email});
                            } , 3000);
                         }
                        
