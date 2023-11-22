@@ -1,6 +1,8 @@
 
 import React, { useState,  useRef } from "react"
+import { Outlet, Link } from "react-router-dom";
 import AlertMessage from "./AlertMessage";
+
  function Auth(props) {
     let [authMode, setAuthMode] = useState("signin")
 
@@ -154,6 +156,10 @@ import AlertMessage from "./AlertMessage";
                   Submit
                 </button>
               </div>
+
+              <p className="text-center mt-2">
+                Forgot <Link to="/forgotpassword">Password?</Link>
+              </p>
             
             </div>
           </form>
@@ -165,7 +171,7 @@ import AlertMessage from "./AlertMessage";
       <div className="Auth-form-container">
         <form className="Auth-form" onSubmit={handleSignup}>
           <div className="Auth-form-content">
-            <h3 className="Auth-form-title">Sign In</h3>
+            <h3 className="Auth-form-title">Sign Up</h3>
             <div className="text-center">
               Already registered?{" "}
               <span className="link-primary" onClick={changeAuthMode}>
@@ -210,9 +216,7 @@ import AlertMessage from "./AlertMessage";
                 Submit
               </button>
             </div>
-            <p className="text-center mt-2">
-              Forgot <a href="#">password?</a>
-            </p>
+         
           </div>
         </form>
       </div>

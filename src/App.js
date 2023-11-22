@@ -1,8 +1,9 @@
 
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./App.css"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Auth from "./Auth"
+import ForgotPassword from "./ForgotPassword"
 
 function App() {
   return (
@@ -10,7 +11,11 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Auth />} />
-        
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route
+             path="*"
+             element={<Navigate to="/" />}
+             />
       </Routes>
     </BrowserRouter>
   )
