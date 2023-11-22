@@ -4,6 +4,7 @@ import "./App.css"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Auth from "./Auth"
 import ForgotPassword from "./ForgotPassword"
+import SetPassword from "./SetPassword"
 
 function App() {
   return (
@@ -12,11 +13,14 @@ function App() {
 
         <Route path="/" element={<Auth />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/setpassword/:email" element={<SetPassword/>}/>
         <Route
              path="*"
              element={<Navigate to="/" />}
              />
       </Routes>
+
+     
     </BrowserRouter>
   )
 }

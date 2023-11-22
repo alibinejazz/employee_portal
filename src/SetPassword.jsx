@@ -1,20 +1,22 @@
 
 import React, { useState,  useRef } from "react"
-import { Link, useNavigate } from "react-router-dom";
-import AlertMessage from "./AlertMessage";
- function ForgotPassword(props) {
-    
+import { Link, useParams, useNavigate } from "react-router-dom";
 
-    const signinEmail = useRef("");
+import AlertMessage from "./AlertMessage";
+ function SetPassword(props) {
+    
+   const navigate = useNavigate();
+    const signupPassword = useRef("");
+    const signupOTP = useRef("");
+    let { email } = useParams();
    
     let [error, setError] = useState("")
     let [successMessage, setSuccessMessage] = useState("")
-    const navigate = useNavigate();
 
     
     const handleSubmit = (event) => {
         event.preventDefault();
-        validateEmail(event, signinEmail.current?.value);
+        validateEmail(event, signupPassword.current?.value, signupOTP.current?.value);
     
       }
 
@@ -23,10 +25,12 @@ import AlertMessage from "./AlertMessage";
       }
 
     
-      function validateEmail(event, email){
+      function validateEmail(event, pass, code){
 
         const payload = {
             username : email,
+            password: pass,
+            otp: code
         };
 
         fetch('http://localhost:8080/api/auth/resetpassword', {
@@ -43,11 +47,12 @@ import AlertMessage from "./AlertMessage";
                         }else if(responseJson.hasOwnProperty("error")){
                           setError(responseJson.error)
                           setSuccessMessage("")
-
                         }else{
                           setSuccessMessage(responseJson.message)
-                          navigate(`/setpassword/${email}`,{email:email});
                           setError("")
+                          setTimeout(()=>{
+                            navigate(`1`,{});
+                           } , 3000);
                         }
                        
                     
@@ -69,7 +74,7 @@ import AlertMessage from "./AlertMessage";
            
           <form className="Auth-form" onSubmit={handleSubmit}>
             <div className="Auth-form-content">
-              <h3 className="Auth-form-title">Forgot passowrd?</h3>
+              <h3 className="Auth-form-title">Set Passowrd</h3>
               <div className="text-center">
                 
               <Link to="/">Back to Sign In</Link>
@@ -81,12 +86,24 @@ import AlertMessage from "./AlertMessage";
 
               </div>
               <div className="form-group mt-3">
-                <label>Email address</label>
+                <label>New Password</label>
                 <input
-                  type="email"
+                  type="password"
                   className="form-control mt-1"
-                  placeholder="Enter email"
-                  ref={signinEmail}
+                  placeholder="Password"
+                  ref={signupPassword}
+                />
+              </div>
+
+              <div className="form-group mt-3">
+                <label>OTP</label>
+                <input
+                  type="password"
+                  className="form-control mt-1"
+                  maxLength="4" 
+                  size="4"
+                  placeholder="OTP"
+                  ref={signupOTP}
                 />
               </div>
             
@@ -105,4 +122,4 @@ import AlertMessage from "./AlertMessage";
    
 }
 
-export default ForgotPassword;
+export default SetPassword;
