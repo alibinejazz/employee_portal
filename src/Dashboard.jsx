@@ -30,7 +30,7 @@ import AlertMessage from "./AlertMessage";
                 <div className="card p-3 py-4">
                     
                     <div className="text-center">
-                        <img src="https://avatars.githubusercontent.com/u/5007881?v=4" width="100" class="rounded-circle"/>
+                        <img src="https://avatars.githubusercontent.com/u/5007881?v=4" width="100" className="rounded-circle"/>
                     </div>
                     
                     <div className="text-center mt-3">

@@ -24,6 +24,43 @@ import AlertMessage from "./AlertMessage";
 
       }
 
+      function resendOTP(event){
+        event.preventDefault();
+        const payload = {
+            username : email,
+        };
+
+        fetch('http://localhost:8080/api/auth/resetpassword', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload),
+                    })
+                    .then((response) => response.json())
+                    .then((responseJson) => {
+                        console.error(responseJson);
+                        if(responseJson.message.includes("Error")){
+                          setError(responseJson.message)
+                          setSuccessMessage("")
+                        }else if(responseJson.hasOwnProperty("error")){
+                          setError(responseJson.error)
+                          setSuccessMessage("")
+
+                        }else{
+                          setSuccessMessage(responseJson.message)
+                          navigate(`/setpassword/${email}`,{email:email});
+                          setError("")
+                        }
+                       
+                    
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        setError(error);
+                        setSuccessMessage("")
+                
+                    });
+      }
+
     
       function validateEmail(event, pass, code){
 
@@ -112,9 +149,17 @@ import AlertMessage from "./AlertMessage";
                   Submit
                 </button>
               </div>
+
+              <div className="d-grid gap-2 mt-3">
+                <button className="btn btn-outline-secondary" onClick={resendOTP}>
+                  Resend OTP
+                </button>
+              </div>
             
             </div>
           </form>
+
+          
         </div>
         </>
       )
