@@ -48,7 +48,7 @@ body{
   background:#eee;
 }
 
-.card{
+.mcard{
   border:none;
 
   position:relative;
@@ -57,7 +57,7 @@ body{
   cursor:pointer;
 }
 
-.card:before{
+.mcard:before{
   
   content:"";
   position:absolute;
@@ -71,7 +71,7 @@ body{
   transform-origin: bottom
 }
 
-.card:after{
+.mcard:after{
   
   content:"";
   position:absolute;
@@ -85,7 +85,7 @@ body{
   transform-origin: bottom
 }
 
-.card:hover::after{
+.mcard:hover::after{
   transform:scaleY(1);
 }
 

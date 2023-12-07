@@ -6,6 +6,7 @@ import Auth from "./Auth"
 import ForgotPassword from "./ForgotPassword"
 import SetPassword from "./SetPassword"
 import Dashboard from "./Dashboard"
+import EmployeesList from "./EmployeesList"
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/setpassword/:email" element={<SetPassword/>}/>
+        <Route path="/employeeslist" element={<EmployeesList />} />
         <Route
              path="*"
              element={<Navigate to="/" />}

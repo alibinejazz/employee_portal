@@ -1,10 +1,10 @@
 
-import React, { useState,  useRef } from "react"
 import { Link, useParams, useNavigate, json } from "react-router-dom";
 
-import AlertMessage from "./AlertMessage";
  function Dashboard(props) {
       const navigate = useNavigate();
+     
+      
       const tokenStr = localStorage.getItem("token");
       var name = "";
       var email = "";
@@ -14,6 +14,8 @@ import AlertMessage from "./AlertMessage";
         email = userData.email;
       }
 
+    
+    
       function logout(){
         localStorage.removeItem("token");
         navigate("/")
@@ -27,7 +29,7 @@ import AlertMessage from "./AlertMessage";
             
             <div className="col-md-7">
                 
-                <div className="card p-3 py-4">
+                <div className="mcard p-3 py-4">
                     
                     <div className="text-center">
                         <img src="https://avatars.githubusercontent.com/u/5007881?v=4" width="100" className="rounded-circle"/>
@@ -53,9 +55,13 @@ import AlertMessage from "./AlertMessage";
                         
                         <div className="buttons">
                             
-                            <button className="btn btn-outline-primary px-4">Message</button>
+        
+                            <Link className="btn btn-outline-primary px-4" to="/employeeslist">Employee Search</Link>
                             <button className="btn btn-danger px-4 ms-3" onClick={logout}>Logout</button>
+                           
                         </div>
+
+                        
                         
                         
                     </div>
@@ -66,10 +72,15 @@ import AlertMessage from "./AlertMessage";
                 </div>
                 
             </div>
+          
             
         </div>
+
+       
         
     </div>
+
+    
   
       )
    
