@@ -1,6 +1,15 @@
+import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
+import { Link, useNavigate } from "react-router-dom";
 
 function EmployeeCard(props) {
+    
+    const navigate = useNavigate();
+
+    function gotoDetails(){
+        navigate(`/employee/${props.empData}`,{id:props.empData});
+    }
+
     return (
         <>
        <br/>
@@ -18,6 +27,14 @@ function EmployeeCard(props) {
         <Card.Text>
            IP:<b>{props.contact}</b>
         </Card.Text>
+
+        <Card.Footer>
+            <Button onClick={gotoDetails}>
+                Show Details
+            </Button>
+
+        </Card.Footer>
+
         </Card.Body>
         </Card>
         </>

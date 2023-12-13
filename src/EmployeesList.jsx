@@ -84,7 +84,7 @@ function EmployeesList(props) {
                     return (
                      
                     <Col className="col-6">
-                    <EmployeeCard name = {emp.name} title = {emp.title} email = {emp.email} contact={emp.contactNumber}/>
+                    <EmployeeCard name = {emp.name} title = {emp.title} email = {emp.email} contact={emp.contactNumber} empData={btoa(JSON.stringify(emp))}/>
                     </Col>
                     
                     )

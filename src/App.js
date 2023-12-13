@@ -7,11 +7,16 @@ import ForgotPassword from "./ForgotPassword"
 import SetPassword from "./SetPassword"
 import Dashboard from "./Dashboard"
 import EmployeesList from "./EmployeesList"
+import NavBar from "./NavBar"
+import EmployeeDetails from "./EmployeeDetails"
 
 
 function App() {
   return (
+   
     <BrowserRouter>
+     <NavBar />
+    
       <Routes>
 
         <Route path="/" element={<Auth />} />
@@ -20,6 +25,7 @@ function App() {
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/setpassword/:email" element={<SetPassword/>}/>
         <Route path="/employeeslist" element={<EmployeesList />} />
+        <Route path="/employee/:id" element={<EmployeeDetails/>}/>
         <Route
              path="*"
              element={<Navigate to="/" />}
@@ -28,6 +34,8 @@ function App() {
 
      
     </BrowserRouter>
+  
+    
   )
 }
 
