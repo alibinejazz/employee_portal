@@ -2,6 +2,7 @@
 import React, { useState,  useRef } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import AlertMessage from "./AlertMessage";
+import Config from "./Config";
  function ForgotPassword(props) {
     
 
@@ -28,8 +29,8 @@ import AlertMessage from "./AlertMessage";
         const payload = {
             username : email,
         };
-
-        fetch('http://localhost:8080/api/auth/resetpassword', {
+        const url = new Config().baseUrl+"auth/resetpassword";
+        fetch(url, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload),

@@ -2,6 +2,7 @@
 import React, { useState,  useRef, useEffect } from "react"
 import {  Button, Col, Container, Form, Row } from 'react-bootstrap';
 import EmployeeCard from "./EmployeeCard";
+import Config from "./Config";
 function EmployeesList(props) {
     const queryRef = useRef("");
     const dataRef = useRef([]);
@@ -17,7 +18,8 @@ function EmployeesList(props) {
 
     useEffect(() => {
         console.log('Bearer '+userData.accessToken)
-        fetch("http://localhost:8080/api/employee/all", {
+        const url = new Config().baseUrl+"employee/all";
+        fetch(url, {
             "headers": {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer "+ userData.accessToken,

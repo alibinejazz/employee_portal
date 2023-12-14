@@ -2,6 +2,7 @@
 import React, { useState,  useRef, useEffect } from "react"
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import AlertMessage from "./AlertMessage";
+import Config from "./Config";
 
 
  function Auth(props) {
@@ -59,10 +60,13 @@ import AlertMessage from "./AlertMessage";
             password : pass
         };
 
-        fetch('http://localhost:8080/api/auth/signin', {
+        const url = new Config().baseUrl+"auth/signin";
+
+        fetch(url, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: { 'Content-Type': 'application/json'},
                         body: JSON.stringify(payload),
+                     
                     })
                     .then((response) => response.json())
                     .then((responseJson) => {
@@ -98,7 +102,9 @@ import AlertMessage from "./AlertMessage";
             role: ["mod", "user"]
         };
 
-        fetch('http://localhost:8080/api/auth/signup', {
+        const url = new Config().baseUrl+"auth/signup";
+
+        fetch(url, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload),

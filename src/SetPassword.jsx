@@ -1,7 +1,7 @@
 
 import React, { useState,  useRef } from "react"
 import { Link, useParams, useNavigate } from "react-router-dom";
-
+import Config from "./Config";
 import AlertMessage from "./AlertMessage";
  function SetPassword(props) {
     
@@ -29,8 +29,8 @@ import AlertMessage from "./AlertMessage";
         const payload = {
             username : email,
         };
-
-        fetch('http://localhost:8080/api/auth/resetpassword', {
+        const url = new Config().baseUrl+"auth/resetpassword";
+        fetch(url, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload),
@@ -69,8 +69,8 @@ import AlertMessage from "./AlertMessage";
             password: pass,
             otp: code
         };
-
-        fetch('http://localhost:8080/api/auth/resetpassword', {
+        const url = new Config().baseUrl+"auth/resetpassword";
+        fetch(url, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload),
