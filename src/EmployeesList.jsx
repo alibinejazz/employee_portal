@@ -1,12 +1,16 @@
 
 import React, { useState,  useRef, useEffect } from "react"
 import {  Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Link, useParams, useNavigate } from "react-router-dom";
 import EmployeeCard from "./EmployeeCard";
 import Config from "./Config";
 function EmployeesList(props) {
     const queryRef = useRef("");
     const dataRef = useRef([]);
     const [data, setData] = useState([]);
+
+    const navigate = useNavigate();
+
     const tokenStr = localStorage.getItem("token");
     var name = "";
     var email = "";
@@ -30,11 +34,21 @@ function EmployeesList(props) {
             .then(response => response.json())
             .then( json => {
                 console.log(JSON.stringify(json))
+                if(json.hasOwnProperty("status")){
+                  localStorage.removeItem("token");
+                  navigate("/")
+
+                }else{
                 setData(json)
                 console.log(JSON.stringify(json))
                 dataRef.current = json;
+              }
             })
-            .catch( error => console.error(error))
+            .catch( error => {
+              console.error(error)
+              localStorage.removeItem("token");
+              navigate("/")
+            })
    
     }, []);
 
